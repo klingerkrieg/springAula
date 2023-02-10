@@ -2,6 +2,9 @@ package com.example.demo.person;
 
 import java.util.List;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.br.CPF;
+
 import com.example.demo.address.Address;
 import com.example.demo.phone.Phone;
 import com.example.demo.project.Project;
@@ -15,6 +18,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Person {
@@ -23,8 +29,21 @@ public class Person {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
 
+  @NotBlank(message = "firstName é obrigatório")
+  @Length(min = 3, max = 35, message = "O nome deverá ter no máximo {max} caracteres")
   private String firstName;
+
+  @NotBlank(message = "lastName é obrigatório")
   private String lastName;
+
+  @NotNull
+  @Email
+  private String email;
+
+  @CPF
+  private String cpf;
+
+  //RELACIONAMENTOS
 
   //mappedBy é o nome da variavel na outra classe
   @ManyToMany(mappedBy = "people")
@@ -32,6 +51,25 @@ public class Person {
 
   @OneToMany(mappedBy = "person")
   private List<Phone> phones;  
+
+
+  /* Getters e setters */
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getCpf() {
+    return cpf;
+  }
+
+  public void setCpf(String cpf) {
+    this.cpf = cpf;
+  }
 
   public List<Phone> getPhones() {
     return phones;

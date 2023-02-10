@@ -1,6 +1,7 @@
 package com.example.demo.phone;
 
 import com.example.demo.person.Person;
+import com.example.demo.validation.PhoneNumber;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -20,6 +21,7 @@ public class Phone {
     @JsonIgnore
     private Person person;
 
+    @PhoneNumber
     private String phoneNumber;
 
     public Long getId() {

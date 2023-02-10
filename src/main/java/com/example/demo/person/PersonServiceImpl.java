@@ -14,7 +14,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Autowired
     private PersonRepository personRepository;
-    
+
     @Override
     public Person addPhone(Long personId, Long phoneId) {
         Person person = personRepository.findById(personId).get();
@@ -22,5 +22,10 @@ public class PersonServiceImpl implements PersonService {
         phone.setPerson(person);
         phoneRepository.save(phone);
         return person;
+    }
+
+    @Override
+    public Person save(Person person) {
+        return personRepository.save(person);
     }
 }

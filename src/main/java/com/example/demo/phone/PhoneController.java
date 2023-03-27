@@ -23,7 +23,7 @@ public class PhoneController {
     @Autowired
     private PhoneService phoneService;
 
-    @PostMapping("/phones")
+    @PostMapping("/phones/")
     @ResponseStatus(HttpStatus.CREATED)
     public Phone save(@Valid @RequestBody Phone phone) {
         return phoneService.save(phone);

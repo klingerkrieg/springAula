@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 public class PersonController {
 
     @Autowired
@@ -33,7 +35,7 @@ public class PersonController {
     }
 
 
-    @PostMapping("/people")
+    @PostMapping("/people/")
     @ResponseStatus(HttpStatus.CREATED)
     public Person save(@Valid @RequestBody Person person) {
         return personService.save(person);
